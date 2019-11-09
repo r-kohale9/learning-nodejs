@@ -1,0 +1,74 @@
+Node JS - A runtime environment for running JS code.
+
+            NOT A PROGRAMMING LANGUAGE && NOT A FRAMEWORK
+
+    - Also used to build backend services such as API.
+        - this is something that powers our app i.e ->
+            - Web app running on the browser
+            - Mobile app running on the mobile browser
+
+    - Highly Scalable, data intensive and real-time app
+        - Supports Asynchronus requests by default unlike rails, c#
+        i.e a single thread to handle multiple requests
+            - for this reason node is IDEAL for i/o intensive apps
+            - NOT for using cpu intensive apps.
+Well their are other services for building a backend such as Django , rails etc so y node well ->
+    - Great for prototyping and agile development
+    - Superfast and Highly scalable 
+        - Used By ->
+            - Uber
+            - Paypal
+            - Netflix
+            - Wallmart
+    - JavaScript EVERYWHERE
+        i.e - Cleaner and more consistent codebase
+    - Large ecosystem for open-source libs
+
+
+2. Node Module System ->
+        - OS
+        - fs
+        - events
+        - http
+    node is js but it does not have window or document which is used for document.getElementById the alternative is global.getElementById.
+    As the variables defind in js can be assesed as window.a in node u cannot access them global.a this give undefined so simply 'a' would suffice.
+
+    - Global objects
+
+    4. 
+        - All the modules in node have .js extension
+        - The content is private by default to make them public i.e accesscible by other module we need to export them as follows
+        function bleh() {
+            // Some code;
+        }
+
+        module.exports.bleh = bleh;
+
+        Now the function bleh is public and can be accesscible by other modules by importing.
+    5. 
+        - To load a module i.e import we use "require('<location>');"
+        - To detect errors present in the .js or code or modules we use jshint by simply running 
+            $ jshint FileName.js
+            This will show if any errors present in the module
+    7.
+        https://nodejs.org
+        Go to->Docs->Select stable Lts version
+        We use 'Path' module to parse the __direname into an object that we can work with.
+    8.
+        - To get details about the os we use 'OS' module
+        - Before the js used to run on the browser so getting information about the os was out of the question and node made this possible. We can get information about files, network.
+    9.
+        - In real world application we should always use asynchronus functions provided by this modules from node, the synchronush function are only provided for simplicity.
+    10. Event
+        - A signal that something has happened.
+
+
+
+
+
+
+
+
+
+
+
