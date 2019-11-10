@@ -61,8 +61,36 @@ Well their are other services for building a backend such as Django , rails etc 
         - In real world application we should always use asynchronus functions provided by this modules from node, the synchronush function are only provided for simplicity.
     10. Event
         - A signal that something has happened.
+        const EventEmitter = require('events');
+        const emiter = new EventEmitter();
+        // Register a listener
+        emitter.on('msgLogged', function() { // emitter.addlistner can also be used it is exactly similar to .on() but .on() is more used.
+            console.log('listener called');
+        });
 
+        // Raise an event
+        emitter.emit('msgLogged');
 
+        - Listener should be called first than the event must be raised other vise nothing will happen.
+    12. Extending EventEmitter
+        - If you want to raise events in your application to signal that something has happened you to create a class Logger that extends the EventEmitter class so that the Logger class has all the functionality defined in EventEmitter class and you can add you own functionalities. Then inside this class whenever you want to raise an event you use 'this.emit()'.
+    
+    13. HTTP Module
+        - When createing http services we don't use http module because with each route the code gets more complex we use another module called 'Express'.
+            // Setting up http service using http module
+            const http = require('http');
+            const server = http.createServer((req, res) => {
+                if (req.url === '/') {
+                    res.write('Hello World');
+                    res.end();
+                }
+                if (req.url === '/array') {
+                    res.write(JSON.stringfy([1,2,3]));
+                    res.end();
+                }
+            });
+            server.listen(3000);
+            console.log('listing at port 3000');
 
 
 
