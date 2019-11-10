@@ -92,6 +92,68 @@ Well their are other services for building a backend such as Django , rails etc 
             server.listen(3000);
             console.log('listing at port 3000');
 
+2. Node Package Manager (NPM) ->
+    1. Package.json 
+        - Before adding any packages you need to add package.json file to your folder/project
+        - creating a Package.json file 
+        $ npm init
+        // faster version
+        $ npm init --yes
+    2. Installing a npm package.
+        - head to npmjs.com > search for package > find command
+    4. Using a package
+        - When we say ->
+        var _ = require('underscore');
+        - It thinks that underscore is a core module in this case it is not so nxt it check if it is a file or folder which it is not then it checks inside node_modules folder where the installed files for underscore are.
+        // core modules
+        // file or folder 
+        // node_modules
+    7. Sematic versioning
+        - ^4.14.5 -> caret -> Major_version.Minor_version.Patch_version  -> meaning -> 4.x
+        - ~4.14.5 -> tilde -> meaning -> 4.14.x
+    8. List the installed packages
+        -
+        $ npm list
+        $ npm list --depth=0
+    9. Viewing registry info for a package
+        -
+        $ npm view mongoose
+        $ npm view mongoose dependencies
+    10. Instaling a specific version for a package
+        - 
+        $ npm i mongoose@x.x.x
+    11. Updating local packages
+        - View if any packages need updating
+        $ npm outdated
+        - to update -> this only updates the minor_version.patch_version and Major_version remains same.
+        $ npm update
+        - if you want to update to latest version for Major_version then 
+        $ sudo npm i -g npm-check-updates // fetches the list of updates
+        $ npm-check-updates // updates, this does not update package.json 
+        $ ncu -u // this only updates package.json 
+        $ npm i
+    12. devDependencies
+        - Dependencies are those libraries without which the project won't work or we need to save so that anyone who has access to code can know what lib's to install.
+        - devDependencies are those libraries without which the project lifecycle won't be affected.
+    13. Uninstall a package
+        - 
+        $ npm uninstall package_name
+            OR
+        $ npm un package_name
+    15. Publishing a package to npm 
+        - 
+        $ npm publish // if faced an error just change the name in package.json 
+    16. Updating a published package
+        - 
+        $ npm version major // updated the Major_version
+        $ npm version minor // updated the minor_version
+        $ npm version patch // updated the patch_version
+        -
+        $ npm publish
+
+
+
+
 
 
 
