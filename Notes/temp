@@ -151,6 +151,28 @@ Well their are other services for building a backend such as Django , rails etc 
         -
         $ npm publish
 
+4. Building RESTful API's Using Express->
+    1. Intro -
+        - Express - lightweight framework for building web application.
+    2. Restfull services
+        - REST - Representational State Transfer
+    5. Nodemon 
+        - To automatically restart the server after any file changes use nodemon
+        $ sudo i -g nodemon
+    6. Environment Variables 
+        - To check for env-var conditionaly use 
+        const port = process.env.PORT ||3000
+        - To set the env-var from console use 
+        $ export port = 5000
+    7. Route parameters
+        localhost:3000/api/courses/2019/1?sortBy=name
+        - Route parameters - the part before the '?' character. This can be read using 
+        res.params // returns a object of parameters.
+        - Query string parameters - the part after the '?' character. This can be read using 
+        res.query // return a object of query parameter.
+        
+    - While creating a route always declare req first then res
+
 
 
 
