@@ -173,6 +173,49 @@ Well their are other services for building a backend such as Django , rails etc 
         
     - While creating a route always declare req first then res
 
+5. Express Advanced topics
+    2. Middleware
+        - Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application’s request-response cycle.
+    4. Built in Middleware
+        - exress.json()
+        - express.urlencoded({extended: true}) // extended means it will also convert array and other to json object 
+        - express.static('public') // to display / load contents from a file.
+    - npm i helmet
+    - npm i morgan
+    
+    6. Environment variables 
+        - To get the environment your code is running in use 
+        app.use('env') // This return development if process.env.NODE_ENV return undefined i.e if no env is set the default is development.
+    7. Configurations
+        - Node module for managing environment config 
+            - rc // Mosh has had some issuses with this module 
+            npm i rc
+            - config // Use this instead
+        - Store passwords in environment variable as follows - 
+        $ export appname_password=1234 // we prefix password or anyother variable with appname so as to avoid clash between different project's env_varibales.
+        - in custom-environment-variable.json you can use the variable appname_password.
+    8 - Debugging
+        - While codding we write some code that we need then later we don't (code deleted or commented at this point) so we have to write it again or uncomment sometimes we need only somecode uncommented so to perform this tedious task we use a npm package called debug.
+        $ npm i debug
+        - Inside the file you import debug
+        const debug = require('debug')('appname:debug-partname');
+        - so whenever you use console.log() use debug it acts exactly the same.
+    9 - Templating engines  // You don't really need this. Just FYI
+        - This convert tokenised strings in to desired html or xml or pdf.
+        - Templating Engines
+            - Pug 
+            $ npm i pug
+            - Mustache
+            - Ejs
+        - Using pug
+            - set view engine to pug it will auto import pug so need to require('pub')
+            app.set('view engine', 'pug');
+            app.set('views', './foldername');
+            - create a file.pug and create the html view be ware of pug html syntax
+            - to render using html markup go to route function 
+            res.render('name', {<parameters>})
+    11. Express dosn't provide authentication
+    
 
 
 

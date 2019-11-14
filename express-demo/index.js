@@ -1,91 +1,37 @@
 // Packages || Modules
-const Joi = require("joi");
+const debug = require("debug")("app:startup");
+const config = require("config");
+const morgan = require("morgan");
+const helmet = require("helmet");
+const logger = require("./middleware/logger");
 const express = require("express");
+const courses = require("./routes/courses");
+const home = require("./routes/home");
 const app = express();
 
 // Something related to json don't know (figuring...).
 app.use(express.json());
-
-// Database
-const courses = [
-  { id: 1, course: "course1" },
-  { id: 2, course: "course2" },
-  { id: 3, course: "course3" }
-];
-
-// Function for coder reusability
-function validateCourse(course) {
-  const schema = {
-    course: Joi.string()
-      .min(3)
-      .required()
-  };
-  return Joi.validate(course, schema);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+app.use(helmet());
+if (app.get("env") === "development") {
+  app.use(morgan("tiny"));
+  console.log("Morgan enabled...");
 }
 
-// Get/Read request api's
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use("/api/courses", courses);
+app.use("/", home);
 
-app.get("/api/courses", (req, res) => {
-  res.send(courses);
-});
+app.set("view engine", "pug");
+app.set("views", "./views");
 
-app.get("/api/courses/:id", (req, res) => {
-  const course = courses.find(c => c.id === parseInt(req.params.id));
-  if (!course)
-    return res.status(400).send("The course with given ID wasn't not found!");
-  res.send(course);
-});
+// Configuration
+debug("Application Name: " + config.get("name")); // is equivalent to -> console.log("Application Name: " + config.get("name"));
+debug("Mail server: " + config.get("mail.host")); // is equivalent to -> console.log("Mail server: " + config.get("mail.host"));
+debug("Mail password: " + config.get("mail.password")); // is equivalent to -> console.log("Mail password: " + config.get("mail.password"));
 
-// Post/Create request api's
-app.post("/api/courses", (req, res) => {
-  const result = validateCourse(req.body);
-  if (result.error)
-    return res.status(400).send(result.error.details[0].message);
-  const course = {
-    id: courses.length + 1,
-    course: req.body.course
-  };
-  courses.push(course);
-  res.send(course);
-});
-
-// Put/Update request api's
-app.put("/api/courses/:id", (req, res) => {
-  // Look up the course
-  // If not existing, return 404
-  const course = courses.find(c => c.id === parseInt(req.params.id));
-  if (!course)
-    return res.status(400).send("The course with given ID was'nt not found!");
-
-  // Validate
-  // If invalid, return 400 - Bad request
-  const { error } = validateCourse(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
-  // Update course
-  // Return the updated course
-  course.course = req.body.course;
-  res.send(course);
-});
-
-// Delete request api's
-app.delete("/api/courses/:id", (req, res) => {
-  // Look up the course
-  // Not existing, return 404
-  const course = courses.find(c => c.id === parseInt(req.params.id));
-  if (!course)
-    return res.status(400).send("The course with given ID was'nt not found!");
-
-  // Delete
-  const index = courses.indexOf(course);
-  courses.splice(index, 1);
-
-  // Return the same course
-  res.send(course);
-});
+// logger
+app.use(logger);
 
 // Server
 const port = process.env.PORT || 3000;
